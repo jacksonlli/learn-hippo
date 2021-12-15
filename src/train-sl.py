@@ -50,6 +50,8 @@ parser.add_argument('--sup_epoch', default=1, type=int)
 parser.add_argument('--n_epoch', default=2, type=int)
 parser.add_argument('--n_examples', default=256, type=int)
 parser.add_argument('--log_root', default='../log/', type=str)
+parser.add_argument('--use_ac', default=0, type=int)
+parser.add_argument('--gamma', default=0., type=float)
 args = parser.parse_args()
 print(args)
 
@@ -84,6 +86,8 @@ n_examples = args.n_examples
 n_epoch = args.n_epoch
 supervised_epoch = args.sup_epoch
 log_root = args.log_root
+use_ac = args.use_ac
+gamma = args.gamma
 
 
 '''init'''
@@ -165,7 +169,7 @@ for epoch_id in np.arange(epoch_id, n_epoch):
 
     [results, metrics] = run_tz(
         agent, optimizer, task, p, n_examples, fix_cond=None, learning=True,
-        get_cache=False, supervised=supervised, noRL=noRL,
+        get_cache=False, supervised=supervised, noRL=noRL, use_ac=use_ac, gamma=gamma
     )
 
     [dist_a, targ_a, _, Log_cond[epoch_id]] = results

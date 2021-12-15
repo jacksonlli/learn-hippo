@@ -1,0 +1,21 @@
+import os
+os.system("python train-sl.py \
+--exp_name test_name \
+--subj_id 0 \
+--penalty 4 \
+--n_epoch 1000 \
+--sup_epoch 600 \
+--similarity_max .9 \
+--similarity_min 0 \
+--penalty_random 1 \
+--def_prob .25 \
+--n_def_tps 0 \
+--cmpt .8 \
+--attach_cond 0 \
+--n_param 16 \
+--enc_size 16 \
+--dict_len 2 \
+--noRL 0 \
+--log_root log \
+--use_ac 0 \
+--gamma 0")

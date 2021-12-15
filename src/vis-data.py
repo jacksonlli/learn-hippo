@@ -31,7 +31,7 @@ from sklearn.decomposition.pca import PCA
 warnings.filterwarnings("ignore")
 sns.set(style='white', palette='colorblind', context='poster')
 gr_pal = sns.color_palette('colorblind')[2:4]
-log_root = '../log/'
+log_root = './log/'
 # log_root = '/tigress/qlu/logs/learn-hippocampus/log'
 all_conds = TZ_COND_DICT.values()
 
@@ -45,8 +45,8 @@ n_def_tps = 0
 # for def_prob in def_prob_range:
 
 # the name of the experiemnt
-exp_name = 'vary-test-penalty'
-subj_ids = np.arange(15)
+exp_name = 'reinforce_gamma99_randpenatly1'
+subj_ids = [0]
 penalty_random = 1
 
 # loading params

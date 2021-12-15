@@ -46,13 +46,15 @@ def get_reward(a_t, y_t, penalty, allow_dk=True):
     # return torch.tensor(r_t).type(torch.FloatTensor).clone().detach()
 
 
-def compute_returns(rewards, gamma=0, normalize=False):
+def compute_returns(rewards, gamma=0, values=None, normalize=False):
     """compute return in the standard policy gradient setting.
 
     Parameters
     ----------
     rewards : list, 1d array
         immediate reward at time t, for all t
+    values : list
+        state value at time t
     gamma : float, [0,1]
         temporal discount factor
     normalize : bool
@@ -68,9 +70,15 @@ def compute_returns(rewards, gamma=0, normalize=False):
     # compute cumulative discounted reward since t, for all t
     R = 0
     returns = []
-    for r in rewards[::-1]:
-        R = r + gamma * R
-        returns.insert(0, R)
+    if values is not None:  # Actor-critic
+        for r, v in zip(rewards, values[1:]):
+            R = r + gamma * v.item()
+            returns.append(R)
+        returns.append(rewards[-1])
+    else:  # Reinforce with baseline
+        for r in rewards[::-1]:
+            R = r + gamma * R
+            returns.insert(0, R)
     returns = torch.tensor(returns)
     # normalize w.r.t to the statistics of this trajectory
     if normalize:

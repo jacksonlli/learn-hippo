@@ -14,7 +14,7 @@ def run_tz(
         agent, optimizer, task, p, n_examples, supervised,
         fix_cond=None, fix_penalty=None, slience_recall_time=None,
         scramble=False, learning=True, get_cache=True, get_data=False,
-        rm_mid_targ=False, noRL=False,
+        rm_mid_targ=False, noRL=False, use_ac = False, gamma=0
 ):
     # sample data
     X, Y = task.sample(n_examples, to_torch=True)
@@ -116,7 +116,10 @@ def run_tz(
                 agent.em.vals = em_copy
 
         # compute RL loss
-        returns = compute_returns(rewards, normalize=p.env.normalize_return)
+        if use_ac==1:
+            returns = compute_returns(rewards, normalize=p.env.normalize_return, gamma=gamma, values=values)
+        else:
+            returns = compute_returns(rewards, normalize=p.env.normalize_return, gamma=gamma)
         loss_actor, loss_critic = compute_a2c_loss(probs, values, returns)
         pi_ent = torch.stack(ents).sum()
         # if learning and not supervised

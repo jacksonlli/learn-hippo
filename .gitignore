@@ -115,3 +115,6 @@ venv.bak/
 src/scratch.py
 src/vis-group.py
 src/task/EpisodicBandit.py
+hippoenv
+.vs
+pip-wheel-metadata

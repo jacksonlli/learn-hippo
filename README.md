@@ -1,3 +1,9 @@
+## INF8953DE
+
+For our experiments, we either directly, in src, run train-sl with our desired parameters or run the run-training.py file which does the same.
+Once trained, figures can generated using the vis-data.py file.
+
+
 ## About this repo
 
 This repo hosts the python code for the following paper: 

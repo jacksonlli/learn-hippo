@@ -3,7 +3,7 @@
 For our experiments, we either directly, in src, run train-sl with our desired parameters or run the run-training.py file which does the same.
 Once trained, figures can generated using the vis-data.py file.
 
-A sh script to run each type of experiments on a slurm system is also available in src:
+sh scripts to run each type of experiments on a slurm system are also available in src:
 submit-vary-train-penalty-seq-8.sh allows to run experiments on the effect of the sequence length.
 submit-vary-test-penalty-val-2.sh allows to run experiments with the number of possible values.
 submit-vary-test-penalty-reinforce.sh and submit-vary-test-penalty-a2c.sh allows to run the analysis on the reinforcement learning algorithms.

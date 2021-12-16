@@ -46,6 +46,7 @@ class P():
         sup_epoch=None,
         n_epoch=None,
         n_example=None,
+        is_a2c=0
     ):
         # set encoding size to be maximal
         # T_part = n_param + pad_len
@@ -98,7 +99,7 @@ class P():
         self.net = net(
             recall_func, kernel, enc_mode, enc_size, noisy_encoding, dict_len,
             n_hidden, n_hidden_dec, lr, gamma, eta, cmpt,
-            n_param, n_branch
+            n_param, n_branch, is_a2c
         )
         self.misc = misc(sup_epoch, n_epoch, n_example)
 
@@ -188,7 +189,7 @@ class net():
         recall_func, kernel,
         enc_mode, enc_size, noisy_encoding, dict_len,
         n_hidden, n_hidden_dec, lr, gamma, eta, cmpt,
-        n_param, n_branch
+        n_param, n_branch, is_a2c
     ):
         self.recall_func = recall_func
         self.kernel = kernel
@@ -202,6 +203,7 @@ class net():
         self.eta = eta
         self.cmpt = cmpt
         self.dict_len = dict_len
+        self.is_a2c = is_a2c
         if noisy_encoding == 1:
             self.dict_len *= 2
         # inferred params
